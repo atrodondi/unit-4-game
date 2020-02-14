@@ -3,7 +3,7 @@ var luke = {
   Health: 110,
   counterAttack: 10
 };
-var senator = {
+var emperor = {
   Attack: 7,
   Health: 100,
   counterAttack: 16
