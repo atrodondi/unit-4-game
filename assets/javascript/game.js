@@ -18,3 +18,10 @@ var vader = {
   Health: 120,
   counterAttack: 15
 };
+
+$(document).ready(function() {
+  $("#lukeHP").text(luke.Health);
+  $("#obiwanHP").text(obiwan.Health);
+  $("#emperorHP").text(emperor.Health);
+  $("#vaderHP").text(vader.Health);
+});

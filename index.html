@@ -6,6 +6,12 @@
     <title>Star Wars RPG</title>
     <link rel="stylesheet" href="assets/css/reset.css." type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/javascript/game.js"></script>
   </head>
   <body>
     <h1>Star Wars RPG!</h1>
@@ -20,7 +26,7 @@
             id="pic1"
             class="portrait"
           />
-          <div id="lukeHP">110</div>
+          <div id="lukeHP"></div>
         </div>
       </div>
       <div id="obiwanBox" class="box">
@@ -32,7 +38,7 @@
             id="pic2"
             class="portrait"
           />
-          <div id="obiwanHP">105</div>
+          <div id="obiwanHP"></div>
         </div>
       </div>
       <div id="emperorBox" class="box">
@@ -44,7 +50,7 @@
             id="pic3"
             class="portrait"
           />
-          <div id="emperorHP">100</div>
+          <div id="emperorHP"></div>
         </div>
       </div>
       <div id="vaderBox" class="box">
@@ -56,11 +62,11 @@
             id="pic4"
             class="portrait"
           />
-          <div id="vaderHP">120</div>
+          <div id="vaderHP"></div>
         </div>
       </div>
     </div>
-    <br />
+
     <div id="yourHero" class="row"><h1>Your Character</h1></div>
     <div id="enemies" class="row"><h1>Enemies Available To Attack</h1></div>
     <div id="fightArea" class="row">
