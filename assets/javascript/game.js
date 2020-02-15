@@ -40,6 +40,14 @@ $(document).ready(function() {
       $("#vaderBox").appendTo("#enemies");
       $("#vaderBox").toggleClass("enemy");
     }
+    // this else asks if the hero is in the enemy div
+    else if ($("#lukeBox", "#enemies").length == 1) {
+      // this if asks if the defender div is "empty". set to 1 b/c of <h1> containing title
+      if ($("#defender").children().length == 1) {
+        $("#lukeBox").appendTo("#defender");
+        $("#lukeBox").toggleClass("defense");
+      }
+    }
   });
 
   // if Obiwan is chosen, sends others to enemy etc.
@@ -62,7 +70,7 @@ $(document).ready(function() {
     }
   });
 
-  // if Emperor is chosen, etc.
+  // if Emperor is chosen, etc.p
   $("#emperorBox").on("click", function() {
     if ($("#emperorBox", "#start").length == 1) {
       $("#emperorBox").appendTo("#yourHero");
@@ -72,6 +80,11 @@ $(document).ready(function() {
       $("#vaderBox").toggleClass("enemy");
       $("#obiwanBox").appendTo("#enemies");
       $("#obiwanBox").toggleClass("enemy");
+    } else if ($("#emperorBox", "#enemies").length == 1) {
+      if ($("#defender").children().length == 1) {
+        $("#emperorBox").appendTo("#defender");
+        $("#emperorBox").toggleClass("defense");
+      }
     }
     // } else if ($("#emperorBox", ))
   });
@@ -86,6 +99,11 @@ $(document).ready(function() {
       $("#obiwanBox").toggleClass("enemy");
       $("#emperorBox").appendTo("#enemies");
       $("#emperorBox").toggleClass("enemy");
+    } else if ($("#vaderBox", "#enemies").length == 1) {
+      if ($("#defender").children().length == 1) {
+        $("#vaderBox").appendTo("#defender");
+        $("#vaderBox").toggleClass("defense");
+      }
     }
   });
 });
