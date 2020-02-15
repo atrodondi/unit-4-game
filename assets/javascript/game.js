@@ -33,12 +33,15 @@ $(document).ready(function() {
     if ($("#lukeBox", "#start").length == 1) {
       // this is sending the clicked hero to chosen place and other guys to enemies
       $("#lukeBox").appendTo("#yourHero");
-      $("#obiwanBox").appendTo("#enemies");
-      $("#obiwanBox").toggleClass("enemy");
-      $("#emperorBox").appendTo("#enemies");
-      $("#emperorBox").toggleClass("enemy");
-      $("#vaderBox").appendTo("#enemies");
-      $("#vaderBox").toggleClass("enemy");
+      $("#obiwanBox")
+        .appendTo("#enemies")
+        .toggleClass("enemy");
+      $("#emperorBox")
+        .appendTo("#enemies")
+        .toggleClass("enemy");
+      $("#vaderBox")
+        .appendTo("#enemies")
+        .toggleClass("enemy");
     }
     // this else asks if the hero is in the enemy div
     else if ($("#lukeBox", "#enemies").length == 1) {
@@ -86,7 +89,6 @@ $(document).ready(function() {
         $("#emperorBox").toggleClass("defense");
       }
     }
-    // } else if ($("#emperorBox", ))
   });
 
   // if Vader is chosen
