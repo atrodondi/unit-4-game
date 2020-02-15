@@ -53,9 +53,12 @@ $(document).ready(function() {
       $("#vaderBox").appendTo("#enemies");
       $("#vaderBox").toggleClass("enemy");
     } else if ($("#obiwanBox", "#enemies").length == 1) {
-      // if ($("#defender").is(":empty")) {
-      $("#obiwanBox").appendTo("#defender");
-      $("#obiwanBox").toggleClass("defense");
+      // ok figured it out, the title Defender, Duh! so set the check to 1 since that will always be there ,
+      // then append the hero to it, it will stay til dead and gone
+      if ($("#defender").children().length == 1) {
+        $("#obiwanBox").appendTo("#defender");
+        $("#obiwanBox").toggleClass("defense");
+      }
     }
   });
 
@@ -70,6 +73,7 @@ $(document).ready(function() {
       $("#obiwanBox").appendTo("#enemies");
       $("#obiwanBox").toggleClass("enemy");
     }
+    // } else if ($("#emperorBox", ))
   });
 
   // if Vader is chosen
