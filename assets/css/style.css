@@ -16,6 +16,8 @@ body {
 }
 .row {
   width: 100%;
+  /* inline block allows all the  divs to stack on top of each other even with the floating hero divs moving around */
+  display: inline-block;
 }
 
 .box {
@@ -33,4 +35,12 @@ body {
   background-color: red;
   border: solid 1px black;
   text-align: center;
+}
+
+.defense {
+  height: 140px;
+  width: 215px;
+  background-color: black;
+  border: solid 3px green;
+  color: white;
 }

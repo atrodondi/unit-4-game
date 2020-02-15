@@ -52,6 +52,10 @@ $(document).ready(function() {
       $("#emperorBox").toggleClass("enemy");
       $("#vaderBox").appendTo("#enemies");
       $("#vaderBox").toggleClass("enemy");
+    } else if ($("#obiwanBox", "#enemies").length == 1) {
+      // if ($("#defender").is(":empty")) {
+      $("#obiwanBox").appendTo("#defender");
+      $("#obiwanBox").toggleClass("defense");
     }
   });
 
