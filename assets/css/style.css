@@ -26,3 +26,11 @@ body {
   text-align: center;
   background-color: ivory;
 }
+
+.enemy {
+  height: 140px;
+  width: 215px;
+  background-color: red;
+  border: solid 1px black;
+  text-align: center;
+}
