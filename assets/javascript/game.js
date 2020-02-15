@@ -29,45 +29,55 @@ $(document).ready(function() {
   // if Luke gets picked as hero, moves him to your hero div and
   // moves other chars to enemy div and alters CSS
   $("#lukeBox").on("click", function() {
-    $("#lukeBox").appendTo("#yourHero");
-    $("#obiwanBox").appendTo("#enemies");
-    $("#obiwanBox").toggleClass("enemy");
-    $("#emperorBox").appendTo("#enemies");
-    $("#emperorBox").toggleClass("enemy");
-    $("#vaderBox").appendTo("#enemies");
-    $("#vaderBox").toggleClass("enemy");
+    // checks to see if the hero is in the starting zone and only then, does it execute the code
+    if ($("#lukeBox", "#start").length == 1) {
+      // this is sending the clicked hero to chosen place and other guys to enemies
+      $("#lukeBox").appendTo("#yourHero");
+      $("#obiwanBox").appendTo("#enemies");
+      $("#obiwanBox").toggleClass("enemy");
+      $("#emperorBox").appendTo("#enemies");
+      $("#emperorBox").toggleClass("enemy");
+      $("#vaderBox").appendTo("#enemies");
+      $("#vaderBox").toggleClass("enemy");
+    }
   });
 
   // if Obiwan is chosen, sends others to enemy etc.
   $("#obiwanBox").on("click", function() {
-    $("#obiwanBox").appendTo("#yourHero");
-    $("#lukeBox").appendTo("#enemies");
-    $("#lukeBox").toggleClass("enemy");
-    $("#emperorBox").appendTo("#enemies");
-    $("#emperorBox").toggleClass("enemy");
-    $("#vaderBox").appendTo("#enemies");
-    $("#vaderBox").toggleClass("enemy");
+    if ($("#obiwanBox", "#start").length == 1) {
+      $("#obiwanBox").appendTo("#yourHero");
+      $("#lukeBox").appendTo("#enemies");
+      $("#lukeBox").toggleClass("enemy");
+      $("#emperorBox").appendTo("#enemies");
+      $("#emperorBox").toggleClass("enemy");
+      $("#vaderBox").appendTo("#enemies");
+      $("#vaderBox").toggleClass("enemy");
+    }
   });
 
   // if Emperor is chosen, etc.
   $("#emperorBox").on("click", function() {
-    $("#emperorBox").appendTo("#yourHero");
-    $("#lukeBox").appendTo("#enemies");
-    $("#lukeBox").toggleClass("enemy");
-    $("#vaderBox").appendTo("#enemies");
-    $("#vaderBox").toggleClass("enemy");
-    $("#obiwanBox").appendTo("#enemies");
-    $("#obiwanBox").toggleClass("enemy");
+    if ($("#emperorBox", "#start").length == 1) {
+      $("#emperorBox").appendTo("#yourHero");
+      $("#lukeBox").appendTo("#enemies");
+      $("#lukeBox").toggleClass("enemy");
+      $("#vaderBox").appendTo("#enemies");
+      $("#vaderBox").toggleClass("enemy");
+      $("#obiwanBox").appendTo("#enemies");
+      $("#obiwanBox").toggleClass("enemy");
+    }
   });
 
   // if Vader is chosen
   $("#vaderBox").on("click", function() {
-    $("#vaderBox").appendTo("#yourHero");
-    $("#lukeBox").appendTo("#enemies");
-    $("#lukeBox").toggleClass("enemy");
-    $("#obiwanBox").appendTo("#enemies");
-    $("#obiwanBox").toggleClass("enemy");
-    $("#emperorBox").appendTo("#enemies");
-    $("#emperorBox").toggleClass("enemy");
+    if ($("#vaderBox", "#start").length == 1) {
+      $("#vaderBox").appendTo("#yourHero");
+      $("#lukeBox").appendTo("#enemies");
+      $("#lukeBox").toggleClass("enemy");
+      $("#obiwanBox").appendTo("#enemies");
+      $("#obiwanBox").toggleClass("enemy");
+      $("#emperorBox").appendTo("#enemies");
+      $("#emperorBox").toggleClass("enemy");
+    }
   });
 });
