@@ -1,31 +1,36 @@
 var luke = {
-  Name: "Luke",
+  Name: "luke",
   Attack: 8,
   BaseAttack: 8,
   Health: 110,
+  BaseHealth: 110,
   counterAttack: 10
 };
 var emperor = {
-  name: "Emperor",
+  name: "emperor",
   Attack: 7,
   BaseAttack: 7,
   Health: 100,
+  BaseHealth: 100,
   counterAttack: 16
 };
 var obiwan = {
-  name: "Obiwan",
+  name: "obiwan",
   Attack: 5,
   BaseAttack: 5,
   Health: 105,
+  BaseHealth: 105,
   counterAttack: 18
 };
 var vader = {
-  name: "Vader",
+  name: "vader",
   Attack: 6,
   BaseAttack: 6,
   Health: 120,
+  BaseHealth: 120,
   counterAttack: 15
 };
+//needed to declare these globally, couldnt figure out how to make it work otherwise
 var myHero;
 var myDefender;
 // updates all the HP of all heroes, clunky but it works.
@@ -36,6 +41,13 @@ function updateHP() {
   $("#vaderHP").text(vader.Health);
 }
 
+// function if enemies die in defender zone. works, but i need to make it listen so i dont need to click.
+function dead() {
+  var DIV = "#" + myDefender.name + "Box";
+  $(DIV).remove();
+}
+
+//when the site load
 $(document).ready(function() {
   // this displays all heroes HP to their "card"
   updateHP();
@@ -148,24 +160,28 @@ $(document).ready(function() {
 
   // if Attack button is pressed.
   $("#attack").on("click", function() {
-    console.log(myHero.Attack);
-    myDefender.Health -= myHero.Attack;
-    myHero.Attack += myHero.BaseAttack;
-    myHero.Health -= myDefender.counterAttack;
-    console.log(myDefender.Health);
-    $("#fightText").html(
-      "<p>You attacked " +
+    if (myDefender.Health <= 0) {
+      dead();
+    } else {
+      console.log(myHero.Attack);
+      myDefender.Health -= myHero.Attack;
+      myHero.Attack += myHero.BaseAttack;
+      myHero.Health -= myDefender.counterAttack;
+      console.log(myDefender.Health);
+      $("#fightText").html(
+        "<p>You attacked " +
+          myDefender.name +
+          " for " +
+          myHero.Attack +
+          " damage.</p>"
+      );
+      $("#fightText2").html(
         myDefender.name +
-        " for " +
-        myHero.Attack +
-        " damage.</p>"
-    );
-    $("#fightText2").html(
-      myDefender.name +
-        " attacked you back for " +
-        myDefender.counterAttack +
-        " damage.</p>"
-    );
-    updateHP();
+          " attacked you back for " +
+          myDefender.counterAttack +
+          " damage.</p>"
+      );
+      updateHP();
+    }
   });
 });
