@@ -1,22 +1,26 @@
 var luke = {
+  Name: "Luke",
   Attack: 8,
   BaseAttack: 8,
   Health: 110,
   counterAttack: 10
 };
 var emperor = {
+  name: "Emperor",
   Attack: 7,
   BaseAttack: 7,
   Health: 100,
   counterAttack: 16
 };
 var obiwan = {
+  name: "Obiwan",
   Attack: 5,
   BaseAttack: 5,
   Health: 105,
   counterAttack: 18
 };
 var vader = {
+  name: "Vader",
   Attack: 6,
   BaseAttack: 6,
   Health: 120,
@@ -24,6 +28,7 @@ var vader = {
 };
 var myHero;
 var myDefender;
+// updates all the HP of all heroes, clunky but it works.
 function updateHP() {
   $("#lukeHP").text(luke.Health);
   $("#obiwanHP").text(obiwan.Health);
@@ -148,6 +153,19 @@ $(document).ready(function() {
     myHero.Attack += myHero.BaseAttack;
     myHero.Health -= myDefender.counterAttack;
     console.log(myDefender.Health);
+    $("#fightText").html(
+      "<p>You attacked " +
+        myDefender.name +
+        " for " +
+        myHero.Attack +
+        " damage.</p>"
+    );
+    $("#fightText2").html(
+      myDefender.name +
+        " attacked you back for " +
+        myDefender.counterAttack +
+        " damage.</p>"
+    );
     updateHP();
   });
 });
