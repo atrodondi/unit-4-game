@@ -41,10 +41,55 @@ function updateHP() {
   $("#vaderHP").text(vader.Health);
 }
 
+function resetHP() {
+  $("#lukeHP").text(luke.BaseHealth);
+  $("#obiwanHP").text(obiwan.BaseHealth);
+  $("#emperorHP").text(emperor.BaseHealth);
+  $("#vaderHP").text(vader.BaseHealth);
+}
+
 // function if enemies die in defender zone. works, but i need to make it listen so i dont need to click.
-function dead() {
+function defenderDead() {
   var DIV = "#" + myDefender.name + "Box";
   $(DIV).remove();
+  $("#fightText").html(
+    "<p> You have defeated " +
+      myDefender.name +
+      ". You can now select another hero to fight!"
+  );
+  $("#fightText2").html("");
+}
+function restart() {
+  resetHP();
+  clearFightText();
+  $("#lukeBox").appendTo($("#start"));
+  $("#obiwanBox").appendTo($("#start"));
+  $("#emperorBox").appendTo($("#start"));
+  $("#vaderBox").appendTo($("#start"));
+}
+
+function myHeroDead() {
+  clearFightText();
+  $("#fightText").html("<p> You been defeated...GAME OVER!!! </p>");
+  $("#restart").css("visibility", "visible");
+  $("#attack").attr("disabled");
+}
+
+// clearing the text in fight zone
+function clearFightText() {
+  $("#fightText").html("");
+  $("#fightText2").html("");
+}
+
+// checking to see if any defender or hero is dead
+function checkDead() {
+  if (myHero.Health <= 0 && myDefender.Health <= 0) {
+    myHeroDead();
+  } else if (myHero.Health <= 0) {
+    myHeroDead();
+  } else if (myDefender.Health <= 0) {
+    myHeroDead();
+  }
 }
 
 //when the site load
@@ -79,6 +124,7 @@ $(document).ready(function() {
         $("#lukeBox").toggleClass("defense");
         myDefender = luke;
         $("#lukeHP").text(myDefender.Health);
+        clearFightText();
       }
       return myHero;
     }
@@ -106,6 +152,7 @@ $(document).ready(function() {
         $("#obiwanBox").toggleClass("defense");
         myDefender = obiwan;
         $("#obiwanHP").text(myDefender.Health);
+        clearFightText();
       }
     }
   });
@@ -130,6 +177,7 @@ $(document).ready(function() {
         $("#emperorBox").toggleClass("defense");
         myDefender = emperor;
         $("#emperorHP").text(myDefender.Health);
+        clearFightText();
       }
     }
   });
@@ -154,6 +202,7 @@ $(document).ready(function() {
         $("#vaderBox").toggleClass("defense");
         myDefender = vader;
         $("#vaderHP").text(vader.Health);
+        clearFightText();
       }
     }
   });
@@ -161,7 +210,7 @@ $(document).ready(function() {
   // if Attack button is pressed.
   $("#attack").on("click", function() {
     if (myDefender.Health <= 0) {
-      dead();
+      defenderDead();
     } else {
       console.log(myHero.Attack);
       myDefender.Health -= myHero.Attack;
@@ -182,6 +231,12 @@ $(document).ready(function() {
           " damage.</p>"
       );
       updateHP();
+      checkDead();
     }
+  });
+
+  //restart button function call
+  $("#restart").on("click", function() {
+    restart();
   });
 });
