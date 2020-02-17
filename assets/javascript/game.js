@@ -7,9 +7,9 @@ var luke = {
   name: "luke",
   Attack: 8,
   BaseAttack: 8,
-  Health: 110,
-  BaseHealth: 110,
-  counterAttack: 11,
+  Health: 120,
+  BaseHealth: 120,
+  counterAttack: 16,
   lukeClick: function() {
     // checks to see if the hero is in the starting zone and only then, does it execute the code
     if ($("#lukeBox", "#start").length == 1) {
@@ -51,8 +51,8 @@ var emperor = {
   name: "emperor",
   Attack: 6,
   BaseAttack: 6,
-  Health: 100,
-  BaseHealth: 100,
+  Health: 120,
+  BaseHealth: 120,
   counterAttack: 14,
   emperorClick: function() {
     if ($("#emperorBox", "#start").length == 1) {
@@ -88,8 +88,8 @@ var obiwan = {
   name: "obiwan",
   Attack: 6,
   BaseAttack: 6,
-  Health: 105,
-  BaseHealth: 105,
+  Health: 130,
+  BaseHealth: 130,
   counterAttack: 15,
   obiwanClick: function() {
     if ($("#obiwanBox", "#start").length == 1) {
@@ -127,9 +127,9 @@ var vader = {
   name: "vader",
   Attack: 7,
   BaseAttack: 7,
-  Health: 120,
-  BaseHealth: 120,
-  counterAttack: 13,
+  Health: 125,
+  BaseHealth: 125,
+  counterAttack: 14,
   vaderClick: function() {
     if ($("#vaderBox", "#start").length == 1) {
       $("#vaderBox").appendTo("#yourHero");
