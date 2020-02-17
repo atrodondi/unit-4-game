@@ -1,5 +1,5 @@
 // DEBUG LIST: 1)CHECK IF THIS HAS BEEN FIXED! select luke, fight obiwan, fight vader, fight emeperor: ono last attack both emperor and luke go below 0, we clock it as luke loses. but luke attacks first, killing emperor before he "counter attacks", do we code it and stack it as such? or have it insteantly counterattack regardless of the fact that the attacker has zero hp
-// 2) make attack button disabled unless there is a hero in the defender div (there must be a hero in the your hero div for it , so no need to write that in  )
+
 //needed to declare these globally, couldnt figure out how to make it work otherwise
 var myHero;
 var myDefender;
@@ -44,6 +44,7 @@ var luke = {
         myDefender.Health = luke.Health;
         $("#lukeHP").text(myDefender.Health);
         game.clearFightText();
+        $("#attack").attr("disabled", false);
       }
     }
   }
@@ -80,6 +81,7 @@ var emperor = {
         myDefender = emperor;
         $("#emperorHP").text(myDefender.Health);
         game.clearFightText();
+        $("#attack").attr("disabled", false);
       }
     }
   }
@@ -118,6 +120,7 @@ var obiwan = {
         myDefender = obiwan;
         $("#obiwanHP").text(myDefender.Health);
         game.clearFightText();
+        $("#attack").attr("disabled", false);
       }
     }
   }
@@ -154,6 +157,7 @@ var vader = {
         myDefender = vader;
         $("#vaderHP").text(vader.Health);
         game.clearFightText();
+        $("#attack").attr("disabled", false);
       }
     }
   }
@@ -229,6 +233,7 @@ var game = {
         ". You can now select another hero to fight!"
     );
     $("#fightText2").html("");
+    $("#attack").attr("disabled", true);
   },
 
   //what happens if myHero is dead
@@ -290,14 +295,14 @@ var game = {
     game.resetClass();
     game.updateHP();
     game.resetAttack();
-    $("#attack").attr("disabled", false);
+    $("#attack").attr("disabled", true);
     $("#restart").css("visibility", "hidden");
     myDefender = "";
     myHero = "";
   }
 };
 
-//when the site loads...
+//when the site loads...the calls/listeners?
 $(document).ready(function() {
   // this displays all heroes HP to their "card"
   game.updateHP();
