@@ -1,5 +1,3 @@
-// DEBUG LIST: 1)CHECK IF THIS HAS BEEN FIXED! select luke, fight obiwan, fight vader, fight emeperor: ono last attack both emperor and luke go below 0, we clock it as luke loses. but luke attacks first, killing emperor before he "counter attacks", do we code it and stack it as such? or have it insteantly counterattack regardless of the fact that the attacker has zero hp
-
 //needed to declare these globally, couldnt figure out how to make it work otherwise
 var myHero;
 var myDefender;
@@ -7,11 +5,11 @@ var myDefender;
 //each "HERO" has its own set of properties along with a function that controls what happens whenever that hero is clicked on, no matter where it is
 var luke = {
   name: "luke",
-  Attack: 9,
-  BaseAttack: 9,
+  Attack: 8,
+  BaseAttack: 8,
   Health: 110,
   BaseHealth: 110,
-  counterAttack: 10,
+  counterAttack: 11,
   lukeClick: function() {
     // checks to see if the hero is in the starting zone and only then, does it execute the code
     if ($("#lukeBox", "#start").length == 1) {
@@ -51,11 +49,11 @@ var luke = {
 };
 var emperor = {
   name: "emperor",
-  Attack: 7,
-  BaseAttack: 7,
+  Attack: 6,
+  BaseAttack: 6,
   Health: 100,
   BaseHealth: 100,
-  counterAttack: 12,
+  counterAttack: 14,
   emperorClick: function() {
     if ($("#emperorBox", "#start").length == 1) {
       $("#emperorBox").appendTo("#yourHero");
@@ -88,11 +86,11 @@ var emperor = {
 };
 var obiwan = {
   name: "obiwan",
-  Attack: 8,
-  BaseAttack: 8,
+  Attack: 6,
+  BaseAttack: 6,
   Health: 105,
   BaseHealth: 105,
-  counterAttack: 11,
+  counterAttack: 15,
   obiwanClick: function() {
     if ($("#obiwanBox", "#start").length == 1) {
       $("#obiwanBox").appendTo("#yourHero");
@@ -127,8 +125,8 @@ var obiwan = {
 };
 var vader = {
   name: "vader",
-  Attack: 6,
-  BaseAttack: 6,
+  Attack: 7,
+  BaseAttack: 7,
   Health: 120,
   BaseHealth: 120,
   counterAttack: 13,
@@ -172,7 +170,16 @@ var game = {
       console.log(myHero.Attack);
       myDefender.Health -= myHero.Attack;
       myHero.Attack += myHero.BaseAttack;
-      myHero.Health -= myDefender.counterAttack;
+      // here i thought it made more sense that if the hero attacked and  killed the defender, the hero
+      // shouldnt take damage, right? before i had it as they both took damage at the same time
+      // and the tie would go to the defender as i just set the hero to being dead.
+      // made more sense this way to me, but had to rebalance some values in attack and counter attack
+      game.checkDead();
+      if (myDefender.Health <= 0) {
+        game.defenderDead();
+      } else {
+        myHero.Health -= myDefender.counterAttack;
+      }
       console.log(myDefender.Health);
       $("#fightText").html(
         "<p>You attacked " +
@@ -230,6 +237,8 @@ var game = {
     $("#fightText").html(
       "<p> You have defeated " +
         myDefender.name +
+        " with an attack of " +
+        myHero.Attack +
         ". You can now select another hero to fight!"
     );
     $("#fightText2").html("");
@@ -253,7 +262,7 @@ var game = {
   //check to see if any heroes are dead, check after each attack so dont have to check upon click
   checkDead: function() {
     if (myHero.Health <= 0 && myDefender.Health <= 0) {
-      game.myHeroDead();
+      game.defenderDead();
     } else if (myHero.Health <= 0) {
       game.myHeroDead();
     } else if (myDefender.Health <= 0) {
