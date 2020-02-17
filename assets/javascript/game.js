@@ -1,3 +1,5 @@
+// DEBUG LIST: 1)CHECK IF THIS HAS BEEN FIXED! select luke, fight obiwan, fight vader, fight emeperor: ono last attack both emperor and luke go below 0, we clock it as luke loses. but luke attacks first, killing emperor before he "counter attacks", do we code it and stack it as such? or have it insteantly counterattack regardless of the fact that the attacker has zero hp
+// 2) make attack button disabled unless there is a hero in the defender div (there must be a hero in the your hero div for it , so no need to write that in  )
 //needed to declare these globally, couldnt figure out how to make it work otherwise
 var myHero;
 var myDefender;
@@ -5,8 +7,8 @@ var myDefender;
 //each "HERO" has its own set of properties along with a function that controls what happens whenever that hero is clicked on, no matter where it is
 var luke = {
   name: "luke",
-  Attack: 8,
-  BaseAttack: 8,
+  Attack: 9,
+  BaseAttack: 9,
   Health: 110,
   BaseHealth: 110,
   counterAttack: 10,
@@ -52,7 +54,7 @@ var emperor = {
   BaseAttack: 7,
   Health: 100,
   BaseHealth: 100,
-  counterAttack: 16,
+  counterAttack: 12,
   emperorClick: function() {
     if ($("#emperorBox", "#start").length == 1) {
       $("#emperorBox").appendTo("#yourHero");
@@ -84,11 +86,11 @@ var emperor = {
 };
 var obiwan = {
   name: "obiwan",
-  Attack: 5,
-  BaseAttack: 5,
+  Attack: 8,
+  BaseAttack: 8,
   Health: 105,
   BaseHealth: 105,
-  counterAttack: 18,
+  counterAttack: 11,
   obiwanClick: function() {
     if ($("#obiwanBox", "#start").length == 1) {
       $("#obiwanBox").appendTo("#yourHero");
@@ -126,7 +128,7 @@ var vader = {
   BaseAttack: 6,
   Health: 120,
   BaseHealth: 120,
-  counterAttack: 15,
+  counterAttack: 13,
   vaderClick: function() {
     if ($("#vaderBox", "#start").length == 1) {
       $("#vaderBox").appendTo("#yourHero");
@@ -183,6 +185,7 @@ var game = {
       );
       game.updateHP();
       game.checkDead();
+      game.win();
     }
   },
   // updates all the HP of all heroes, clunky but it works.
@@ -214,7 +217,7 @@ var game = {
       .removeClass("box enemy defense")
       .toggleClass("box");
   },
-  // function if enemies die in defender zone. works, but i need to make it listen so i dont need to click.
+  // function to control what to do if enemies die in defender zone.
   defenderDead: function() {
     var DIV = "#" + myDefender.name + "Box";
     $(DIV)
@@ -230,6 +233,7 @@ var game = {
 
   //what happens if myHero is dead
   myHeroDead: function() {
+    game.clearFightText();
     $("#fightText").html("<p> You been defeated...GAME OVER!!! </p>");
     $("#restart").css("visibility", "visible");
     $("#attack").attr("disabled", true);
@@ -241,7 +245,7 @@ var game = {
     $("#fightText2").html("");
   },
 
-  //check to see if any heroes are dead, check after each attack
+  //check to see if any heroes are dead, check after each attack so dont have to check upon click
   checkDead: function() {
     if (myHero.Health <= 0 && myDefender.Health <= 0) {
       game.myHeroDead();
@@ -258,7 +262,16 @@ var game = {
     emperor.Attack = emperor.BaseAttack;
     vader.Attack = vader.BaseAttack;
   },
-
+  //function listening for win? check after each attack?
+  win: function() {
+    if ($("#graveyard").children().length == 3) {
+      $("#attack").attr("disabled", true);
+      game.clearFightText();
+      $("#fightText").html("<p> YOU WIN!!! GAME OVER!!!</p>");
+      $("#restart").css("visibility", "visible");
+    }
+  },
+  //function that resets the game without reloading page. resets values and locations and classes
   restart: function() {
     game.resetHP();
     game.clearFightText();
@@ -278,21 +291,23 @@ var game = {
     game.updateHP();
     game.resetAttack();
     $("#attack").attr("disabled", false);
+    $("#restart").css("visibility", "hidden");
+    myDefender = "";
+    myHero = "";
   }
 };
 
-//when the site load
+//when the site loads...
 $(document).ready(function() {
   // this displays all heroes HP to their "card"
   game.updateHP();
 
-  // if Luke gets picked as hero, moves him to your hero div and
-  // moves other chars to enemy div and alters CSS
+  // each hero has a call if chosen as players hero
   $("#lukeBox").on("click", function() {
     luke.lukeClick();
   });
 
-  // if Obiwan is chosen, sends others to enemy etc.
+  // if Obiwan is chosen,
   $("#obiwanBox").on("click", function() {
     obiwan.obiwanClick();
   });

@@ -46,3 +46,11 @@ body {
   color: white;
   text-align: center;
 }
+
+#graveyard {
+  float: right;
+}
+
+#title {
+  float: right;
+}

@@ -14,13 +14,13 @@
     <script src="assets/javascript/game.js"></script>
   </head>
   <body>
-    <h1>Star Wars RPG!</h1>
+    <h1 id="title">Star Wars RPG!</h1>
     <div id="start" class="row">
       <div id="lukeBox" class="box">
         <div id="lukePic">
           <div id="lukeName">Luke</div>
 
-          <img 
+          <img
             src="assets\images\luke.jpg"
             alt="luke"
             id="pic1"
@@ -78,6 +78,7 @@
     <div id="fightText"></div>
     <div id="fightText2"></div>
     <button id="restart" style="visibility: hidden;">Restart</button>
+    <!-- needed to find a place to put dead heroes but not have to recreate a new html element for game reset. made graveyard div -->
     <div id="graveyard" style="visibility: hidden;"></div>
   </body>
 </html>
