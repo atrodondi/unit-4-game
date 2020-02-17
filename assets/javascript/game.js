@@ -1,5 +1,5 @@
 var luke = {
-  Name: "luke",
+  name: "luke",
   Attack: 8,
   BaseAttack: 8,
   Health: 110,
@@ -40,18 +40,36 @@ function updateHP() {
   $("#emperorHP").text(emperor.Health);
   $("#vaderHP").text(vader.Health);
 }
-
+// reset hp
 function resetHP() {
-  $("#lukeHP").text(luke.BaseHealth);
-  $("#obiwanHP").text(obiwan.BaseHealth);
-  $("#emperorHP").text(emperor.BaseHealth);
-  $("#vaderHP").text(vader.BaseHealth);
+  luke.Health = luke.BaseHealth;
+  obiwan.Health = obiwan.BaseHealth;
+  emperor.Health = emperor.BaseHealth;
+  vader.Health = vader.BaseHealth;
+}
+
+//reset to starting class
+function resetClass() {
+  $("#lukeBox")
+    .removeClass("box enemy defense")
+    .toggleClass("box");
+  $("#obiwanBox")
+    .removeClass("box enemy defense")
+    .toggleClass("box");
+  $("#emperorBox")
+    .removeClass("box enemy defense")
+    .toggleClass("box");
+  $("#vaderBox")
+    .removeClass("box enemy defense")
+    .toggleClass("box");
 }
 
 // function if enemies die in defender zone. works, but i need to make it listen so i dont need to click.
 function defenderDead() {
   var DIV = "#" + myDefender.name + "Box";
-  $(DIV).remove();
+  $(DIV)
+    .css("visibility", "hidden")
+    .appendTo("#graveyard");
   $("#fightText").html(
     "<p> You have defeated " +
       myDefender.name +
@@ -59,20 +77,41 @@ function defenderDead() {
   );
   $("#fightText2").html("");
 }
+// reset attacks
+function resetAttack() {
+  luke.Attack = luke.BaseAttack;
+  obiwan.Attack = obiwan.BaseAttack;
+  emperor.Attack = emperor.BaseAttack;
+  vader.Attack = vader.BaseAttack;
+}
+//restart function
 function restart() {
   resetHP();
   clearFightText();
-  $("#lukeBox").appendTo($("#start"));
-  $("#obiwanBox").appendTo($("#start"));
-  $("#emperorBox").appendTo($("#start"));
-  $("#vaderBox").appendTo($("#start"));
+  $("#lukeBox")
+    .css("visibility", "visible")
+    .appendTo($("#start"));
+  $("#obiwanBox")
+    .css("visibility", "visible")
+    .appendTo($("#start"));
+  $("#emperorBox")
+    .css("visibility", "visible")
+    .appendTo($("#start"));
+  $("#vaderBox")
+    .css("visibility", "visible")
+    .appendTo($("#start"));
+  resetClass();
+  updateHP();
+  resetAttack();
+  $("#attack").attr("disabled", false);
 }
 
+// myhero is dead function
 function myHeroDead() {
   clearFightText();
   $("#fightText").html("<p> You been defeated...GAME OVER!!! </p>");
   $("#restart").css("visibility", "visible");
-  $("#attack").attr("disabled");
+  $("#attack").attr("disabled", true);
 }
 
 // clearing the text in fight zone
@@ -88,7 +127,7 @@ function checkDead() {
   } else if (myHero.Health <= 0) {
     myHeroDead();
   } else if (myDefender.Health <= 0) {
-    myHeroDead();
+    defenderDead();
   }
 }
 
@@ -108,25 +147,29 @@ $(document).ready(function() {
       console.log(myHero);
       $("#obiwanBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#emperorBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#vaderBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
     }
     // this else asks if the hero is in the enemy div
     else if ($("#lukeBox", "#enemies").length == 1) {
       // this if asks if the defender div is "empty". set to 1 b/c of <h1> containing title
       if ($("#defender").children().length == 1) {
         $("#lukeBox").appendTo("#defender");
-        $("#lukeBox").toggleClass("defense");
+        $("#lukeBox")
+          .toggleClass("defense")
+          .removeClass("enemy");
         myDefender = luke;
         $("#lukeHP").text(myDefender.Health);
         clearFightText();
       }
-      return myHero;
     }
   });
 
@@ -137,19 +180,24 @@ $(document).ready(function() {
       myHero = obiwan;
       $("#lukeBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#emperorBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#vaderBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
     } else if ($("#obiwanBox", "#enemies").length == 1) {
       // ok figured it out, the title Defender, Duh! so set the check to 1 since that will always be there ,
       // then append the hero to it, it will stay til dead and gone
       if ($("#defender").children().length == 1) {
         $("#obiwanBox").appendTo("#defender");
-        $("#obiwanBox").toggleClass("defense");
+        $("#obiwanBox")
+          .toggleClass("defense")
+          .removeClass("enemy");
         myDefender = obiwan;
         $("#obiwanHP").text(myDefender.Health);
         clearFightText();
@@ -164,17 +212,22 @@ $(document).ready(function() {
       myHero = emperor;
       $("#lukeBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#vaderBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#obiwanBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
     } else if ($("#emperorBox", "#enemies").length == 1) {
       if ($("#defender").children().length == 1) {
         $("#emperorBox").appendTo("#defender");
-        $("#emperorBox").toggleClass("defense");
+        $("#emperorBox")
+          .toggleClass("defense")
+          .removeClass("enemy");
         myDefender = emperor;
         $("#emperorHP").text(myDefender.Health);
         clearFightText();
@@ -189,17 +242,22 @@ $(document).ready(function() {
       myHero = vader;
       $("#lukeBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#obiwanBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
       $("#emperorBox")
         .appendTo("#enemies")
-        .toggleClass("enemy");
+        .toggleClass("enemy")
+        .removeClass("box");
     } else if ($("#vaderBox", "#enemies").length == 1) {
       if ($("#defender").children().length == 1) {
         $("#vaderBox").appendTo("#defender");
-        $("#vaderBox").toggleClass("defense");
+        $("#vaderBox")
+          .toggleClass("defense")
+          .removeClass("enemy");
         myDefender = vader;
         $("#vaderHP").text(vader.Health);
         clearFightText();

@@ -35,6 +35,7 @@ body {
   background-color: red;
   border: solid 1px black;
   text-align: center;
+  float: left;
 }
 
 .defense {
@@ -43,4 +44,5 @@ body {
   background-color: black;
   border: solid 3px green;
   color: white;
+  text-align: center;
 }
