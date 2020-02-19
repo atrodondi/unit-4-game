@@ -16,7 +16,6 @@ var luke = {
       // this is sending the clicked hero to chosen place and other guys to enemies
       $("#lukeBox").appendTo("#yourHero");
       myHero = luke;
-      console.log(myHero);
       $("#obiwanBox")
         .appendTo("#enemies")
         .toggleClass("enemy")
@@ -167,7 +166,6 @@ var game = {
     if (myDefender.Health <= 0) {
       game.defenderDead();
     } else {
-      console.log(myHero.Attack);
       myDefender.Health -= myHero.Attack;
       myHero.Attack += myHero.BaseAttack;
       // here i thought it made more sense that if the hero attacked and  killed the defender, the hero
@@ -180,7 +178,6 @@ var game = {
       } else {
         myHero.Health -= myDefender.counterAttack;
       }
-      console.log(myDefender.Health);
       $("#fightText").html(
         "<p>You attacked " +
           myDefender.name +
